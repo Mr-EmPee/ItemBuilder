@@ -23,8 +23,6 @@ package ml.empee.itembuilder;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import java.lang.reflect.Field;
-import java.util.UUID;
 import ml.empee.itembuilder.utils.SkullUtil;
 import ml.empee.itembuilder.utils.VersionHelper;
 import org.bukkit.OfflinePlayer;
@@ -32,6 +30,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.Field;
+import java.util.UUID;
 
 /**
  * New builder for skull only, created to separate the specific features for skulls Soon I'll add more useful

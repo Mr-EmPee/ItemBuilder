@@ -21,8 +21,6 @@
 
 package ml.empee.itembuilder;
 
-import java.util.Arrays;
-import java.util.List;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -30,6 +28,9 @@ import org.bukkit.inventory.meta.FireworkEffectMeta;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Item builder for {@link Material#FIREWORK_ROCKET} and {@link Material#FIREWORK_ROCKET} only

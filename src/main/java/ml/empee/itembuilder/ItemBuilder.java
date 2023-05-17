@@ -205,4 +205,19 @@ public class ItemBuilder extends BaseItemBuilder<ItemBuilder> {
     return new FireworkBuilder(itemStack);
   }
 
+  /**
+   * Method for creating a {@link PotionBuilder} which will have {@link Material#POTION} specific
+   * methods
+   *
+   * @param itemStack an existing {@link Material#POTION} {@link ItemStack}
+   * @return A new {@link PotionBuilder}
+   * @throws RuntimeException if the item type is not {@link Material#POTION},
+   * {@link Material#LINGERING_POTION} or {@link Material#SPLASH_POTION}
+   */
+  @NotNull
+  @Contract("_ -> new")
+  public static PotionBuilder potion(@NotNull final ItemStack itemStack) {
+    return new PotionBuilder(itemStack);
+  }
+
 }

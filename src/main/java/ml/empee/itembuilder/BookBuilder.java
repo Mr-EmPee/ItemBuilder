@@ -21,9 +21,6 @@
 
 package ml.empee.itembuilder;
 
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -31,6 +28,10 @@ import org.bukkit.inventory.meta.BookMeta;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.List;
 
 /**
  * Item builder for {@link Material#WRITTEN_BOOK} and {@link Material#WRITTEN_BOOK} only

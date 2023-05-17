@@ -21,14 +21,6 @@
 
 package ml.empee.itembuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 import ml.empee.itembuilder.utils.ItemNbt;
 import ml.empee.itembuilder.utils.VersionHelper;
 import org.bukkit.Bukkit;
@@ -44,6 +36,15 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * Contains all the common methods for the future ItemBuilders
@@ -110,7 +111,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B>> {
   @NotNull
   @Contract("_, _, _ -> this")
   public B enchant(@NotNull final Enchantment enchantment, final int level,
-      final boolean ignoreLevelRestriction) {
+                   final boolean ignoreLevelRestriction) {
     meta.addEnchant(enchantment, level, ignoreLevelRestriction);
     return (B) this;
   }
@@ -150,8 +151,9 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B>> {
    */
   @NotNull
   @Contract("_, _ -> this")
-  public B enchant(@NotNull final Map<Enchantment, Integer> enchantments,
-      final boolean ignoreLevelRestriction) {
+  public B enchant(
+      @NotNull final Map<Enchantment, Integer> enchantments, final boolean ignoreLevelRestriction
+  ) {
     enchantments.forEach(
         (enchantment, level) -> this.enchant(enchantment, level, ignoreLevelRestriction));
     return (B) this;

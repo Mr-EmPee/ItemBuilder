@@ -21,9 +21,6 @@
 
 package ml.empee.itembuilder;
 
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.List;
 import ml.empee.itembuilder.utils.VersionHelper;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -34,6 +31,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.List;
 
 /**
  * Item builder for banners only
@@ -142,8 +143,9 @@ public final class BannerBuilder extends BaseItemBuilder<BannerBuilder> {
    */
   @NotNull
   @Contract("_, _, _ -> this")
-  public BannerBuilder pattern(final int index, @NotNull final DyeColor color,
-      @NotNull final PatternType pattern) {
+  public BannerBuilder pattern(
+      final int index, @NotNull final DyeColor color, @NotNull final PatternType pattern
+  ) {
     return pattern(index, new Pattern(color, pattern));
   }
 

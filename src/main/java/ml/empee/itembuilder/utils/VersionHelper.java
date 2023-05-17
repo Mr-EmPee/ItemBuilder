@@ -22,10 +22,11 @@
 package ml.empee.itembuilder.utils;
 
 import com.google.common.primitives.Ints;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Class for detecting server version for legacy support :(
