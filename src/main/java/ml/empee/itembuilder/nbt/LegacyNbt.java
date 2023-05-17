@@ -87,6 +87,7 @@ public final class LegacyNbt implements NbtWrapper {
     try {
       setStringMethod.invoke(itemCompound, key, value);
     } catch (IllegalAccessException | InvocationTargetException ignored) {
+      //ignore
     }
   }
 
@@ -94,6 +95,7 @@ public final class LegacyNbt implements NbtWrapper {
     try {
       setBooleanMethod.invoke(itemCompound, key, value);
     } catch (IllegalAccessException | InvocationTargetException ignored) {
+      //ignore
     }
   }
 
@@ -107,6 +109,7 @@ public final class LegacyNbt implements NbtWrapper {
     try {
       removeTagMethod.invoke(itemCompound, key);
     } catch (IllegalAccessException | InvocationTargetException ignored) {
+      //ignore
     }
   }
 
@@ -163,6 +166,7 @@ public final class LegacyNbt implements NbtWrapper {
     try {
       setTagMethod.invoke(nmsItemStack, itemCompound);
     } catch (IllegalAccessException | InvocationTargetException ignored) {
+      //ignore
     }
   }
 
