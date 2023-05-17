@@ -49,6 +49,7 @@ import org.jetbrains.annotations.NotNull;
  * Contains all the common methods for the future ItemBuilders
  *
  * @param <B> The ItemBuilder type so the methods can cast to the subtype
+ * @author GabyTM <a href="https://github.com/iGabyTM">https://github.com/iGabyTM</a>
  */
 @SuppressWarnings("unchecked")
 public abstract class BaseItemBuilder<B extends BaseItemBuilder<B>> {
