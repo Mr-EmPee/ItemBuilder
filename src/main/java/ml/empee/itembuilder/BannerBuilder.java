@@ -64,7 +64,7 @@ public final class BannerBuilder extends BaseItemBuilder<BannerBuilder> {
   BannerBuilder(@NotNull ItemStack itemStack) {
     super(itemStack);
 
-    if (!itemStack.getType().name().contains("SHIELD") && !BANNERS.contains(itemStack.getType())) {
+    if (!BANNERS.contains(itemStack.getType())) {
       throw new RuntimeException("BannerBuilder requires the material to be a banner or a shield!");
     }
   }
