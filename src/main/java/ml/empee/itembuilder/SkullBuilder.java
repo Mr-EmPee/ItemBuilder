@@ -1,44 +1,50 @@
 /**
  * MIT License
- * <p>
+ *
  * Copyright (c) 2021 TriumphTeam
- * <p>
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- * associated documentation files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- * following conditions:
- * <p>
- * The above copyright notice and this permission notice shall be included in all copies or substantial
- * portions of the Software.
- * <p>
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
- * LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO
- * EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
- * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
- * USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
-
 package ml.empee.itembuilder;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import ml.empee.itembuilder.utils.SkullUtil;
 import ml.empee.itembuilder.utils.VersionHelper;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.profile.PlayerProfile;
+import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.UUID;
 
 /**
- * New builder for skull only, created to separate the specific features for skulls Soon I'll add more useful
- * features to this builder
+ * New builder for skull only, created to separate the specific features for skulls
  */
-public class SkullBuilder extends BaseItemBuilder<SkullBuilder> {
+public final class SkullBuilder extends BaseItemBuilder<SkullBuilder> {
 
   private static final Field PROFILE_FIELD;
 
@@ -71,14 +77,36 @@ public class SkullBuilder extends BaseItemBuilder<SkullBuilder> {
   /**
    * Sets the skull texture using a BASE64 string
    *
-   * @param texture   The base64 texture
+   * @param texture The base64 texture
    * @param profileId The unique id of the profile
    * @return {@link SkullBuilder}
    */
   @NotNull
   @Contract("_, _ -> this")
   public SkullBuilder texture(@NotNull final String texture, @NotNull final UUID profileId) {
-    if (!SkullUtil.isPlayerSkull(getItemStack())) {
+    if (!SkullUtil.isPlayerSkull(getItemStack())) return this;
+
+    if (VersionHelper.IS_PLAYER_PROFILE_API) {
+      final String textureUrl = SkullUtil.getSkinUrl(texture);
+
+      if (textureUrl == null) {
+        return this;
+      }
+
+      final SkullMeta skullMeta = (SkullMeta) getMeta();
+      final PlayerProfile profile = Bukkit.createPlayerProfile(profileId, "");
+      final PlayerTextures textures = profile.getTextures();
+
+      try {
+        textures.setSkin(new URL(textureUrl));
+      } catch (MalformedURLException e) {
+        e.printStackTrace();
+        return this;
+      }
+
+      profile.setTextures(textures);
+      skullMeta.setOwnerProfile(profile);
+      setMeta(skullMeta);
       return this;
     }
 
@@ -87,7 +115,7 @@ public class SkullBuilder extends BaseItemBuilder<SkullBuilder> {
     }
 
     final SkullMeta skullMeta = (SkullMeta) getMeta();
-    final GameProfile profile = new GameProfile(profileId, null);
+    final GameProfile profile = new GameProfile(profileId, "");
     profile.getProperties().put("textures", new Property("textures", texture));
 
     try {
