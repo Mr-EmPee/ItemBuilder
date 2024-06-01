@@ -7,10 +7,10 @@ plugins {
 version = findProperty("tag") ?: "0.0.2-SNAPSHOT"
 
 dependencies {
-  compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
+  compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
 }
 
-java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(11))
 
 mavenPublishing {
   coordinates("io.github.mr-empee", "item-builder", version.toString())
